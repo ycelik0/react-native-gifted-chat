@@ -311,25 +311,25 @@ export default class MessageContainer<
     }
   }
 
-  onEndReached = ({ distanceFromEnd }: { distanceFromEnd: number }) => {
-    const {
-      loadEarlier,
-      onLoadEarlier,
-      infiniteScroll,
-      isLoadingEarlier,
-    } = this.props
-    if (
-      infiniteScroll &&
-      (this.state.hasScrolled || distanceFromEnd > 0) &&
-      distanceFromEnd <= 100 &&
-      loadEarlier &&
-      onLoadEarlier &&
-      !isLoadingEarlier &&
-      Platform.OS !== 'web'
-    ) {
-      onLoadEarlier()
-    }
-  }
+  // onEndReached = ({ distanceFromEnd }: { distanceFromEnd: number }) => {
+  //   const {
+  //     loadEarlier,
+  //     onLoadEarlier,
+  //     infiniteScroll,
+  //     isLoadingEarlier,
+  //   } = this.props
+  //   if (
+  //     infiniteScroll &&
+  //     (this.state.hasScrolled || distanceFromEnd > 0) &&
+  //     distanceFromEnd <= 100 &&
+  //     loadEarlier &&
+  //     onLoadEarlier &&
+  //     !isLoadingEarlier &&
+  //     Platform.OS !== 'web'
+  //   ) {
+  //     onLoadEarlier()
+  //   }
+  // }
 
   keyExtractor = (item: TMessage) => `${item._id}`
 
@@ -341,8 +341,9 @@ export default class MessageContainer<
           this.props.alignTop ? styles.containerAlignTop : styles.container
         }
       >
-        <FlatList
+        <FlashList
           ref={this.props.forwardRef}
+          estimatedItemSize={100}
           extraData={[this.props.extraData, this.props.isTyping]}
           keyExtractor={this.keyExtractor}
           enableEmptySections
