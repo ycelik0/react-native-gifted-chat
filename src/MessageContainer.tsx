@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React, { RefObject } from 'react'
 
 import {
-  FlatList,
   View,
   StyleSheet,
   TouchableOpacity,
@@ -24,6 +23,7 @@ import TypingIndicator from './TypingIndicator'
 
 import { StylePropType } from './utils'
 import { warning } from './logging'
+import { FlashList } from '@shopify/flash-list'
 
 const styles = StyleSheet.create({
   container: {
@@ -79,7 +79,7 @@ export interface MessageContainerProps<TMessage extends IMessage> {
   invertibleScrollViewProps?: any
   extraData?: any
   scrollToBottomOffset?: number
-  forwardRef?: RefObject<FlatList<IMessage>>
+  forwardRef?: RefObject<FlashList<IMessage>>
   renderChatEmpty?(): React.ReactNode
   renderFooter?(props: MessageContainerProps<TMessage>): React.ReactNode
   renderMessage?(props: Message['props']): React.ReactNode
@@ -311,25 +311,25 @@ export default class MessageContainer<
     }
   }
 
-  // onEndReached = ({ distanceFromEnd }: { distanceFromEnd: number }) => {
-  //   const {
-  //     loadEarlier,
-  //     onLoadEarlier,
-  //     infiniteScroll,
-  //     isLoadingEarlier,
-  //   } = this.props
-  //   if (
-  //     infiniteScroll &&
-  //     (this.state.hasScrolled || distanceFromEnd > 0) &&
-  //     distanceFromEnd <= 100 &&
-  //     loadEarlier &&
-  //     onLoadEarlier &&
-  //     !isLoadingEarlier &&
-  //     Platform.OS !== 'web'
-  //   ) {
-  //     onLoadEarlier()
-  //   }
-  // }
+  onEndReached = () => {
+    // const {
+    //   loadEarlier,
+    //   onLoadEarlier,
+    //   infiniteScroll,
+    //   isLoadingEarlier,
+    // } = this.props
+    // if (
+    //   infiniteScroll &&
+    //   (this.state.hasScrolled || distanceFromEnd > 0) &&
+    //   distanceFromEnd <= 100 &&
+    //   loadEarlier &&
+    //   onLoadEarlier &&
+    //   !isLoadingEarlier &&
+    //   Platform.OS !== 'web'
+    // ) {
+    //   onLoadEarlier()
+    // }
+  }
 
   keyExtractor = (item: TMessage) => `${item._id}`
 
