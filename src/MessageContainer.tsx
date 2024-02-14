@@ -350,8 +350,6 @@ export default class MessageContainer<
           automaticallyAdjustContentInsets={false}
           inverted={inverted}
           data={this.props.messages}
-          style={styles.listStyle}
-          contentContainerStyle={styles.contentContainerStyle}
           renderItem={this.renderRow}
           {...this.props.invertibleScrollViewProps}
           ListEmptyComponent={this.renderChatEmpty}
